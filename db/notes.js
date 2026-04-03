@@ -58,6 +58,7 @@ export function getNotes() {
  */
 export function getNoteById(id) {
   // TODO
+  return notes.find(note => note.id === id);
 }
 
 /**
@@ -67,5 +68,9 @@ export function getNoteById(id) {
  * @returns {Note} the newly created note
  */
 export function addNote(text) {
-  // TODO
+  // TODO 
+  const newId = notes.length + 1;
+  const newNote = { id: newId, text: text };
+  notes.push(newNote);
+  return newNote;
 }

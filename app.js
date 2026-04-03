@@ -1,14 +1,23 @@
 import express from "express";
-const app = express();
-export default app;
+import notesRouter from "./api/notes.js";
 
-// Simple logging middleware
+const app = express();
+
+// Preprocessing: JSON body parser 
+app.use(express.json());
+
+// Preprocessing: Logging middleware
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`);
   next();
 });
 
-// Catch-all error-handling middleware
+// Route-handling: Mount the router
+app.use("/notes", notesRouter);
+
+// Error-handling: Catch-all 
 app.use((err, req, res, next) => {
   res.status(500).send("Sorry! Something went wrong :(");
 });
+
+export default app;
